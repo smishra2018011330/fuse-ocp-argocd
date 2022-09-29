@@ -5,7 +5,7 @@ metadata:
   creationTimestamp: null
   labels:
     app: bgdsample
-  name: fuse
+  name: bgdsample
 spec:
   replicas: 1
   selector:

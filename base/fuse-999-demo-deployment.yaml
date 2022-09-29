@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - image: quay.io/redhatworkshops/bgd:latest
-        name: bgd
+        name: fuse
         env:
         - name: COLOR
           value: "blue"

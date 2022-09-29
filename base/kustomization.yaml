@@ -1,0 +1,3 @@
+resources:
+- fuse-01-namespace.yaml
+- fuse-999-demo-deployment.yaml

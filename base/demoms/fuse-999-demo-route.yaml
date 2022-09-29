@@ -7,7 +7,7 @@ metadata:
   name: bgdsample
   namespace: fuse
 spec:
-  host: ""
+  host: "bgdsample-fuse.apps.ocp.virt.prospecta.com.au"
   port:
     targetPort: 8080
   to:

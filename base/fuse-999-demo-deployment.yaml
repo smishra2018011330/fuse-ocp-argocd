@@ -4,19 +4,19 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: bgd
+    app: fuse
   name: fuse
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: bgd
+      app: fuse
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: bgd
+        app: fuse
     spec:
       containers:
       - image: quay.io/redhatworkshops/bgd:latest

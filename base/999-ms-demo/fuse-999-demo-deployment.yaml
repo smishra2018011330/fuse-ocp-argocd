@@ -76,5 +76,23 @@ spec:
           value: always
         - name: management.endpoint.health.show-details
           value: always
+        - name: dms.endpoint
+          value: https://dev.masterdataonline.com/dms
+        - name: grpc.crud.address.port
+          value: "10000"
+        - name: elastic.link
+          value: "192.168.10.47"
+        - name: elastic.username
+          value: 'null'
+        - name: elastic.password
+          value: 'null'
+        - name: grpc.crud.address.url
+          value: 'null'
+        - name: grpc.rule.address.url
+          value: 'null'
+        - name: grpc.rule.address.port
+          value:  "10000"
+        - name: spring.datasource.driverClassName
+          value:  org.postgresql.Driver
         resources: {}
 ---

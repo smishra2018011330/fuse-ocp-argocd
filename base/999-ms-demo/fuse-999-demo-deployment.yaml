@@ -24,5 +24,11 @@ spec:
         env:
         - name: server.port
           value: "8080"
+        - name: spring.datasource.url
+          value: jdbc:postgresql://192.168.10.43:5432/mdo_dev_core
+        - name: spring.datasource.username
+          value: 'null'
+        - name: spring.datasource.password
+          value: 'null'
         resources: {}
 ---

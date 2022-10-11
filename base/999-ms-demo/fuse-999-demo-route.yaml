@@ -5,7 +5,6 @@ metadata:
   labels:
     app: core-ui
   name: core-ui
-  namespace: fuse
 spec:
   host: "core-ui-testing-without-ns.apps.ocp.virt.prospecta.com.au"
   port:

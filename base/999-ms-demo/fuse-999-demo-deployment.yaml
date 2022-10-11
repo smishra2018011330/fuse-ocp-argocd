@@ -44,5 +44,17 @@ spec:
           value: 192.168.10.85:5672
         - name: spring.rabbitmq.host
           value: 192.168.10.85
+        - name: mdospark.path
+          value: 192.168.10.106:8080/opt/share/spark_main_fuse.properties
+        - name: mdospark.homepath
+          value: /opt/share
+        - name: mdospark.version
+          value: 2021.03.03-SNAPSHOT
+        - name: mdospark.endpoint
+          value: 192.168.10.106:8998/batches
+        - name: spring.rabbitmq.port
+          value: "5672"
+        - name: spring.rabbitmq.ssl.enabled
+          value: 'false'
         resources: {}
 ---

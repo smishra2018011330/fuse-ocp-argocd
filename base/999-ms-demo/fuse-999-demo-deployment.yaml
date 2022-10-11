@@ -21,7 +21,8 @@ spec:
       containers:
       - image: docker.prospecta.com/prospecta/core-ui:development
         name: core-ui
-      ports:
-        - containerPort: 8080 
+        env:
+        - name: server.port
+          value: "8080"
         resources: {}
 ---

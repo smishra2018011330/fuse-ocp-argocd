@@ -20,8 +20,8 @@ spec:
     spec:
       containers:
       - image: docker.prospecta.com/prospecta/core-ui:development
-        imagePullSecrets:
-          - name: nexus
+      imagePullSecrets:
+        - name: nexus
         name: core-ui
         env:
         - name: server.port

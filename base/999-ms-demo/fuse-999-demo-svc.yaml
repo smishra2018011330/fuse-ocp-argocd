@@ -4,13 +4,13 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    app: bgdsample
-  name: bgdsample
+    app: core-ui
+  name: core-ui
 spec:
   ports:
   - port: 8080
     protocol: TCP
     targetPort: 8080
   selector:
-    app: bgdsample
+    app: core-ui
 ---

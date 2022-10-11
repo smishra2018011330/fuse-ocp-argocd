@@ -20,6 +20,8 @@ spec:
     spec:
       containers:
       - image: docker.prospecta.com/prospecta/core-ui:development
+        imagePullSecrets:
+          - name: nexus
         name: core-ui
         env:
         - name: server.port
@@ -124,7 +126,5 @@ spec:
           value:  https
         - name: elastic.port
           value:  "9200"
-        imagePullSecrets:
-          - name: nexus
         resources: {}
 ---

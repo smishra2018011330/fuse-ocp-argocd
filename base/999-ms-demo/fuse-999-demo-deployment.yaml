@@ -94,5 +94,35 @@ spec:
           value:  "10000"
         - name: spring.datasource.driverClassName
           value:  org.postgresql.Driver
+        - name: spring.jpa.properties.hibernate.cache.use_second_level_cache
+          value:  "true"
+        - name: spring.jpa.properties.javax.persistence.sharedCache.mode
+          value:  ENABLE_SELECTIVE
+        - name: spring.jpa.properties.hibernate.cache.use_query_cache
+          value:  "true"
+        - name: spring.jpa.properties.hibernate.cache.region.factory_class
+          value:  com.hazelcast.hibernate.HazelcastCacheRegionFactory
+        - name: grpc.process.address.url
+          value: 'null'
+        - name: grpc.process.address.port
+          value:  "10000"
+        - name: library.url
+          value:  dataplay.connekthub.com
+        - name: library.token
+          value: 'null'
+        - name: server.max-http-header-size
+          value:  512KB
+        - name: spring.datasource.hikari.connection-timeout
+          value:  "20000"
+        - name: spring.datasource.hikari.minimum-idle
+          value:  "1"
+        - name: spring.datasource.hikari.maximum-pool-size
+          value:  "4"
+        - name: spring.datasource.hikari.idleTimeout
+          value:  "30000"
+        - name: elastic.protocol
+          value:  https
+        - name: elastic.port
+          value:  "9200"
         resources: {}
 ---

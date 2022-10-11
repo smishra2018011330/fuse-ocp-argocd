@@ -56,5 +56,25 @@ spec:
           value: "5672"
         - name: spring.rabbitmq.ssl.enabled
           value: 'false'
+        - name: server.canonical.url
+          value: https://dev.masterdataonline.com/core
+        - name: server.name
+          value: dev.masterdataonline.com
+        - name: grpc.server.port
+          value: "10000"
+        - name: management.health.group.alb.defaults.enabled
+          value: 'true'
+        - name: management.endpoint.health.group.alb.include
+          value: "ping"
+        - name: management.endpoint.health.group.alb.show-components
+          value: always
+        - name: management.health.default-enabled
+          value: 'true'
+        - name: management.health.defaults.enabled
+          value: 'true'
+        - name: management.endpoint.health.group.alb.show-details
+          value: always
+        - name: management.endpoint.health.show-details
+          value: always
         resources: {}
 ---

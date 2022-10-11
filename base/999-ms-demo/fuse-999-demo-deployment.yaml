@@ -34,5 +34,15 @@ spec:
           value: https://192.168.10.47:9200
         - name: spring.elasticsearch.rest.uris
           value: https://192.168.10.47:9200
+        - name: mdo.config.jwt_rsk
+          value: 'null'
+        - name: spring.rabbitmq.username
+          value: 'null'
+        - name: spring.rabbitmq.password
+          value: 'null'
+        - name: spring.rabbitmq.addresses
+          value: 192.168.10.85:5672
+        - name: spring.rabbitmq.host
+          value: 192.168.10.85
         resources: {}
 ---

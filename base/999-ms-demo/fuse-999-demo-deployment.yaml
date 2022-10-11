@@ -1,128 +1,179 @@
----
+--- 
 apiVersion: apps/v1
 kind: Deployment
-metadata:
-  creationTimestamp: null
-  labels:
+metadata: 
+  creationTimestamp: ~
+  labels: 
     app: core-ui
   name: core-ui
-spec:
+spec: 
   replicas: 3
-  selector:
-    matchLabels:
+  selector: 
+    matchLabels: 
       app: core-ui
   strategy: {}
-  template:
-    metadata:
-      creationTimestamp: null
-      labels:
+  template: 
+    metadata: 
+      creationTimestamp: ~
+      labels: 
         app: core-ui
-    spec:
-      containers:
-      - image: docker.prospecta.com/prospecta/core-ui:development
-        name: core-ui
-        env:
-        - name: server.port
-          value: "8080"
-        - name: spring.datasource.url
-          value: jdbc:postgresql://192.168.10.43:5432/mdo_dev_core
-        - name: spring.datasource.username
-          value: 'null'
-        - name: spring.datasource.password
-          value: 'null'
-        - name: spring.data.elasticsearch.client.reactive.endpoints
-          value: https://192.168.10.47:9200
-        - name: spring.elasticsearch.rest.uris
-          value: https://192.168.10.47:9200
-        - name: mdo.config.jwt_rsk
-          value: 'null'
-        - name: spring.rabbitmq.username
-          value: 'null'
-        - name: spring.rabbitmq.password
-          value: 'null'
-        - name: spring.rabbitmq.addresses
-          value: 192.168.10.85:5672
-        - name: spring.rabbitmq.host
-          value: 192.168.10.85
-        - name: mdospark.path
-          value: 192.168.10.106:8080/opt/share/spark_main_fuse.properties
-        - name: mdospark.homepath
-          value: /opt/share
-        - name: mdospark.version
-          value: 2021.03.03-SNAPSHOT
-        - name: mdospark.endpoint
-          value: 192.168.10.106:8998/batches
-        - name: spring.rabbitmq.port
-          value: "5672"
-        - name: spring.rabbitmq.ssl.enabled
-          value: 'false'
-        - name: server.canonical.url
-          value: https://dev.masterdataonline.com/core
-        - name: server.name
-          value: dev.masterdataonline.com
-        - name: grpc.server.port
-          value: "10000"
-        - name: management.health.group.alb.defaults.enabled
-          value: 'true'
-        - name: management.endpoint.health.group.alb.include
-          value: "ping"
-        - name: management.endpoint.health.group.alb.show-components
-          value: always
-        - name: management.health.default-enabled
-          value: 'true'
-        - name: management.health.defaults.enabled
-          value: 'true'
-        - name: management.endpoint.health.group.alb.show-details
-          value: always
-        - name: management.endpoint.health.show-details
-          value: always
-        - name: dms.endpoint
-          value: https://dev.masterdataonline.com/dms
-        - name: grpc.crud.address.port
-          value: "10000"
-        - name: elastic.link
-          value: "192.168.10.47"
-        - name: elastic.username
-          value: 'null'
-        - name: elastic.password
-          value: 'null'
-        - name: grpc.crud.address.url
-          value: 'null'
-        - name: grpc.rule.address.url
-          value: 'null'
-        - name: grpc.rule.address.port
-          value:  "10000"
-        - name: spring.datasource.driverClassName
-          value:  org.postgresql.Driver
-        - name: spring.jpa.properties.hibernate.cache.use_second_level_cache
-          value:  "true"
-        - name: spring.jpa.properties.javax.persistence.sharedCache.mode
-          value:  ENABLE_SELECTIVE
-        - name: spring.jpa.properties.hibernate.cache.use_query_cache
-          value:  "true"
-        - name: spring.jpa.properties.hibernate.cache.region.factory_class
-          value:  com.hazelcast.hibernate.HazelcastCacheRegionFactory
-        - name: grpc.process.address.url
-          value: 'null'
-        - name: grpc.process.address.port
-          value:  "10000"
-        - name: library.url
-          value:  dataplay.connekthub.com
-        - name: library.token
-          value: 'null'
-        - name: server.max-http-header-size
-          value:  512KB
-        - name: spring.datasource.hikari.connection-timeout
-          value:  "20000"
-        - name: spring.datasource.hikari.minimum-idle
-          value:  "1"
-        - name: spring.datasource.hikari.maximum-pool-size
-          value:  "4"
-        - name: spring.datasource.hikari.idleTimeout
-          value:  "30000"
-        - name: elastic.protocol
-          value:  https
-        - name: elastic.port
-          value:  "9200"
-        resources: {}
----
+    spec: 
+      containers: 
+        - 
+          env: 
+            - 
+              name: server.port
+              value: "8080"
+            - 
+              name: spring.datasource.url
+              value: "jdbc:postgresql://192.168.10.43:5432/mdo_dev_core"
+            - 
+              name: spring.datasource.username
+              value: "null"
+            - 
+              name: spring.datasource.password
+              value: "null"
+            - 
+              name: spring.data.elasticsearch.client.reactive.endpoints
+              value: "https://192.168.10.47:9200"
+            - 
+              name: spring.elasticsearch.rest.uris
+              value: "https://192.168.10.47:9200"
+            - 
+              name: mdo.config.jwt_rsk
+              value: "null"
+            - 
+              name: spring.rabbitmq.username
+              value: "null"
+            - 
+              name: spring.rabbitmq.password
+              value: "null"
+            - 
+              name: spring.rabbitmq.addresses
+              value: "192.168.10.85:5672"
+            - 
+              name: spring.rabbitmq.host
+              value: "192.168.10.85"
+            - 
+              name: mdospark.path
+              value: "192.168.10.106:8080/opt/share/spark_main_fuse.properties"
+            - 
+              name: mdospark.homepath
+              value: /opt/share
+            - 
+              name: mdospark.version
+              value: 2021.03.03-SNAPSHOT
+            - 
+              name: mdospark.endpoint
+              value: "192.168.10.106:8998/batches"
+            - 
+              name: spring.rabbitmq.port
+              value: "5672"
+            - 
+              name: spring.rabbitmq.ssl.enabled
+              value: "false"
+            - 
+              name: server.canonical.url
+              value: "https://dev.masterdataonline.com/core"
+            - 
+              name: server.name
+              value: dev.masterdataonline.com
+            - 
+              name: grpc.server.port
+              value: "10000"
+            - 
+              name: management.health.group.alb.defaults.enabled
+              value: "true"
+            - 
+              name: management.endpoint.health.group.alb.include
+              value: ping
+            - 
+              name: management.endpoint.health.group.alb.show-components
+              value: always
+            - 
+              name: management.health.default-enabled
+              value: "true"
+            - 
+              name: management.health.defaults.enabled
+              value: "true"
+            - 
+              name: management.endpoint.health.group.alb.show-details
+              value: always
+            - 
+              name: management.endpoint.health.show-details
+              value: always
+            - 
+              name: dms.endpoint
+              value: "https://dev.masterdataonline.com/dms"
+            - 
+              name: grpc.crud.address.port
+              value: "10000"
+            - 
+              name: elastic.link
+              value: "192.168.10.47"
+            - 
+              name: elastic.username
+              value: "null"
+            - 
+              name: elastic.password
+              value: "null"
+            - 
+              name: grpc.crud.address.url
+              value: "null"
+            - 
+              name: grpc.rule.address.url
+              value: "null"
+            - 
+              name: grpc.rule.address.port
+              value: "10000"
+            - 
+              name: spring.datasource.driverClassName
+              value: org.postgresql.Driver
+            - 
+              name: spring.jpa.properties.hibernate.cache.use_second_level_cache
+              value: "true"
+            - 
+              name: spring.jpa.properties.javax.persistence.sharedCache.mode
+              value: ENABLE_SELECTIVE
+            - 
+              name: spring.jpa.properties.hibernate.cache.use_query_cache
+              value: "true"
+            - 
+              name: spring.jpa.properties.hibernate.cache.region.factory_class
+              value: com.hazelcast.hibernate.HazelcastCacheRegionFactory
+            - 
+              name: grpc.process.address.url
+              value: "null"
+            - 
+              name: grpc.process.address.port
+              value: "10000"
+            - 
+              name: library.url
+              value: dataplay.connekthub.com
+            - 
+              name: library.token
+              value: "null"
+            - 
+              name: server.max-http-header-size
+              value: 512KB
+            - 
+              name: spring.datasource.hikari.connection-timeout
+              value: "20000"
+            - 
+              name: spring.datasource.hikari.minimum-idle
+              value: "1"
+            - 
+              name: spring.datasource.hikari.maximum-pool-size
+              value: "4"
+            - 
+              name: spring.datasource.hikari.idleTimeout
+              value: "30000"
+            - 
+              name: elastic.protocol
+              value: https
+            - 
+              name: elastic.port
+              value: "9200"
+          image: "docker.prospecta.com/prospecta/core-ui:development"
+          name: core-ui
+          resources: {}

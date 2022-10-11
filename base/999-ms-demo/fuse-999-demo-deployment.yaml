@@ -124,7 +124,7 @@ spec:
           value:  https
         - name: elastic.port
           value:  "9200"
-      imagePullSecrets:
-        - name: nexus
+        imagePullSecrets:
+          - name: nexus
         resources: {}
 ---

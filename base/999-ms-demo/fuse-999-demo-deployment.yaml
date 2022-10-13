@@ -20,160 +20,235 @@ spec:
     spec: 
       containers: 
         - 
-          env: 
-            - 
-              name: server.port
-              value: "8080"
-            - 
-              name: spring.datasource.url
-              value: "jdbc:postgresql://192.168.10.43:5432/mdo_dev_core"
-            - 
-              name: spring.datasource.username
-              value: "null"
-            - 
-              name: spring.datasource.password
-              value: "null"
-            - 
-              name: spring.data.elasticsearch.client.reactive.endpoints
-              value: "https://192.168.10.47:9200"
-            - 
-              name: spring.elasticsearch.rest.uris
-              value: "https://192.168.10.47:9200"
-            - 
-              name: mdo.config.jwt_rsk
-              value: "null"
-            - 
-              name: spring.rabbitmq.username
-              value: "null"
-            - 
-              name: spring.rabbitmq.password
-              value: "null"
-            - 
-              name: spring.rabbitmq.addresses
-              value: "192.168.10.85:5672"
-            - 
-              name: spring.rabbitmq.host
-              value: "192.168.10.85"
-            - 
-              name: mdospark.path
-              value: "192.168.10.106:8080/opt/share/spark_main_fuse.properties"
-            - 
-              name: mdospark.homepath
-              value: /opt/share
-            - 
-              name: mdospark.version
-              value: 2021.03.03-SNAPSHOT
-            - 
-              name: mdospark.endpoint
-              value: "192.168.10.106:8998/batches"
-            - 
-              name: spring.rabbitmq.port
-              value: "5672"
-            - 
-              name: spring.rabbitmq.ssl.enabled
-              value: "false"
-            - 
-              name: server.canonical.url
-              value: "https://dev.masterdataonline.com/core"
-            - 
-              name: server.name
-              value: dev.masterdataonline.com
-            - 
-              name: grpc.server.port
-              value: "10000"
-            - 
-              name: management.health.group.alb.defaults.enabled
-              value: "true"
-            - 
-              name: management.endpoint.health.group.alb.include
-              value: ping
-            - 
-              name: management.endpoint.health.group.alb.show-components
-              value: always
-            - 
-              name: management.health.default-enabled
-              value: "true"
-            - 
-              name: management.health.defaults.enabled
-              value: "true"
-            - 
-              name: management.endpoint.health.group.alb.show-details
-              value: always
-            - 
-              name: management.endpoint.health.show-details
-              value: always
-            - 
-              name: dms.endpoint
-              value: "https://dev.masterdataonline.com/dms"
-            - 
-              name: grpc.crud.address.port
-              value: "10000"
-            - 
-              name: elastic.link
-              value: "192.168.10.47"
-            - 
-              name: elastic.username
-              value: "null"
-            - 
-              name: elastic.password
-              value: "null"
-            - 
-              name: grpc.crud.address.url
-              value: "null"
-            - 
-              name: grpc.rule.address.url
-              value: "null"
-            - 
-              name: grpc.rule.address.port
-              value: "10000"
-            - 
-              name: spring.datasource.driverClassName
+          env:
+            - name: spring.datasource.url
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: SPRING_DATASOURCE_URL_DEV_CORE
+            - name: spring.datasource.username
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: SPRING_DATASOURCE_USER
+            - name: spring.datasource.password
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: SPRING_DATASOURCE_PASSWD
+            - name: spring.data.elasticsearch.client.reactive.endpoints
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: SPRING_DATA_ELASTICSEARCH_CLIENT_REACTIVE_ENDPOINTS
+            - name: spring.elasticsearch.rest.uris
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: SPRING_ELASTICSEARCH_REST_URIS
+            - name: mdo.config.jwt_rsk
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: MDO_CONFIG_JWT_RSK
+            - name: spring.rabbitmq.username
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: SPRING_RABBITMQ_USER
+            - name: spring.rabbitmq.password
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: SPRING_RABBITMQ_PASSWD
+            - name: spring.rabbitmq.addresses
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: SPRING_RABBITMQ_ADDRESS
+            - name: spring.rabbitmq.host
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: SPRING_RABBITMQ_HOST
+            - name: mdospark.path
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: MDOSPARK_PATH
+            - name: mdospark.homepath
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: MDOSPARK_HOMEPATH
+            - name: mdospark.version
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: MDOSPARK_VERSION
+            - name: mdospark.endpoint
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: MDOSPARK_ENDPOINT
+            - name: spring.rabbitmq.port
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: SPRING_RABBITMQ_PORT
+            - name: spring.rabbitmq.ssl.enabled
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: SPRING_RABBITMQ_SSL_ENABLED
+            - name: server.canonical.url
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: SERVER_CANONICAL_URL_IN_CORE
+            - name: server.name
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: SERVER_NAME
+            - name: grpc.server.port
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: GRPC_CORE_UI_SERVER_PORT
+            - name: management.endpoint.health.show-details
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_SHOW-DETAILS
+            - name: management.endpoint.health.show-details
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_SHOW-DETAILS
+            - name: management.health.defaults.enabled
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: MANAGEMENT_HEALTH_DEFAULTS_ENABLED
+            - name: management.endpoint.health.group.alb.include
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_GROUP_ALB_INCLUDE
+            - name: management.endpoint.health.group.alb.include
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_GROUP_ALB_INCLUDE
+            - name: management.endpoint.health.group.alb.show-components
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_GROUP_ALB_SHOW-COMPONENTS
+            - name: management.endpoint.health.group.alb.show-components
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_GROUP_ALB_SHOW-COMPONENTS
+            - name: management.endpoint.health.group.alb.show-details
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_GROUP_ALB_SHOW-DETAILS
+            - name: management.endpoint.health.group.alb.show-details
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_GROUP_ALB_SHOW-DETAILS
+            - name: management.health.group.alb.defaults.enabled
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: MANAGEMENT_HEALTH_GROUP_ALB_DEFAULTS_ENABLED
+            - name: management.health.group.alb.defaults.enabled
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: MANAGEMENT_HEALTH_GROUP_ALB_DEFAULTS_ENABLED
+            - name: dms.endpoint
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: SERVER_CANONICAL_URL_IN_DMS
+            - name: grpc.crud.address.port
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: GRPC_CRUD_UI_SERVER_PORT
+            - name: elastic.link
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: ELASTIC_LINK
+            - name: elastic.username
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: ELASTIC_USERNAME
+            - name: elastic.password
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: ELASTIC_PASSWORD
+            - name: grpc.crud.address.url
+              value: 'null'
+            - name: grpc.rule.address.url
+              value: 'null'
+            - name: grpc.rule.address.port
+              value: '10000'
+            - name: NEW_RELIC_APP_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: SERVER_CANONICAL_URL_IN_CORE
+            - name: NEW_RELIC_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: NEWRELIC_LICENSE_KEY
+            - name: spring.datasource.driverClassName
               value: org.postgresql.Driver
-            - 
-              name: spring.jpa.properties.hibernate.cache.use_second_level_cache
-              value: "true"
-            - 
-              name: spring.jpa.properties.javax.persistence.sharedCache.mode
+            - name: spring.jpa.properties.hibernate.cache.use_second_level_cache
+              value: 'true'
+            - name: spring.jpa.properties.javax.persistence.sharedCache.mode
               value: ENABLE_SELECTIVE
-            - 
-              name: spring.jpa.properties.hibernate.cache.use_query_cache
-              value: "true"
-            - 
-              name: spring.jpa.properties.hibernate.cache.region.factory_class
+            - name: spring.jpa.properties.hibernate.cache.use_query_cache
+              value: 'true'
+            - name: spring.jpa.properties.hibernate.cache.region.factory_class
               value: com.hazelcast.hibernate.HazelcastCacheRegionFactory
-            - 
-              name: grpc.process.address.url
-              value: "null"
-            - 
-              name: grpc.process.address.port
-              value: "10000"
-            - 
-              name: library.url
+            - name: grpc.process.address.url
+              value: 'null'
+            - name: grpc.process.address.port
+              value: '10000'
+            - name: library.url
               value: dataplay.connekthub.com
-            - 
-              name: library.token
-              value: "null"
-            - 
-              name: server.max-http-header-size
+            - name: library.token
+              value: 6a380455-6b2f-4510-bb38-08a75c0275b4
+            - name: management.health.default-enabled
+              valueFrom:
+                secretKeyRef:
+                  name: singapore-secrets
+                  key: MANAGEMENT_HEALTH_DEFAULTS_ENABLED
+            - name: server.max-http-header-size
               value: 512KB
-            - 
-              name: spring.datasource.hikari.connection-timeout
-              value: "20000"
-            - 
-              name: spring.datasource.hikari.minimum-idle
-              value: "1"
-            - 
-              name: spring.datasource.hikari.maximum-pool-size
-              value: "4"
-            - 
-              name: spring.datasource.hikari.idleTimeout
-              value: "30000"
-            - 
-              name: elastic.protocol
+            - name: spring.datasource.hikari.connection-timeout
+              value: '20000'
+            - name: spring.datasource.hikari.minimum-idle
+              value: '1'
+            - name: spring.datasource.hikari.maximum-pool-size
+              value: '10'
+            - name: spring.datasource.hikari.idleTimeout
+              value: '30000'
+            - name: elastic.protocol
               value: https
-            - 
-              name: elastic.port
-              value: "9200"
+            - name: elastic.port
+              value: '9200'
           image: "docker.prospecta.com/prospecta/core-ui:development"
           name: core-ui
           resources: {}

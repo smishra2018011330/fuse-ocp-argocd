@@ -252,3 +252,5 @@ spec:
           image: "docker.prospecta.com/prospecta/core-ui:development"
           name: core-ui
           resources: {}
+          securityContext:
+            privileged: false

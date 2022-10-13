@@ -19,6 +19,8 @@ spec:
         app: core-ui
     spec: 
       containers: 
+       imagePullSecrets:
+        - name: nexus-image-pull
         - 
           env:
             - name: spring.datasource.url
@@ -254,5 +256,4 @@ spec:
           resources: {}
           securityContext:
             privileged: false
-          imagePullSecrets:
-          - name: nexus-image-pull
+---

@@ -256,5 +256,6 @@ spec:
             privileged: false
       securityContext: {}
       imagePullSecrets:
-        - name: nexus-image-pull 
+        - name: nexus-image-pull
+      serviceAccount: runasanyuid
 ---

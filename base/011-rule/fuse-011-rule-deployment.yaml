@@ -1,0 +1,257 @@
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  creationTimestamp: ~
+  labels: 
+    app: rule
+  name: rule
+spec: 
+  replicas: 3
+  selector: 
+    matchLabels: 
+      app: rule
+  strategy: {}
+  template: 
+    metadata: 
+      creationTimestamp: ~
+      labels: 
+        app: rule
+    spec: 
+      containers: 
+        - 
+          env:
+            - name: spring.datasource.url
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_DATASOURCE_URL_DEV_RULE
+            - name: spring.datasource.username
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_DATASOURCE_USER
+            - name: spring.datasource.password
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_DATASOURCE_PASSWD
+            - name: mdo.config.jwt_rsk
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MDO_CONFIG_JWT_RSK
+            - name: spring.rabbitmq.username
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_RABBITMQ_USER
+            - name: spring.rabbitmq.password
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_RABBITMQ_PASSWD
+            - name: spring.rabbitmq.addresses
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_RABBITMQ_ADDRESS
+            - name: mdospark.path
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MDOSPARK_PATH
+            - name: mdospark.homepath
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MDOSPARK_HOMEPATH
+            - name: mdospark.version
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MDOSPARK_VERSION
+            - name: mdospark.endpoint
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MDOSPARK_ENDPOINT
+            - name: spring.rabbitmq.host
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_RABBITMQ_HOST
+            - name: spring.rabbitmq.port
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_RABBITMQ_PORT
+            - name: spring.rabbitmq.ssl.enabled
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_RABBITMQ_SSL_ENABLED
+            - name: server.name
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SERVER_NAME
+            - name: grpc.server.port
+              value: '10000'
+            - name: grpc.core.ui.server.port
+              value: '10000'
+            - name: grpc.core.crud.server.port
+              value: '10000'
+            - name: management.endpoint.health.group.alb.show-details
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_GROUP_ALB_SHOW-DETAILS
+            - name: management.endpoint.health.group.alb.include
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_GROUP_ALB_INCLUDE
+            - name: management.endpoint.health.group.alb.show-components
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_GROUP_ALB_SHOW-COMPONENTS
+            - name: management.health.group.alb.defaults.enabled
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MANAGEMENT_HEALTH_GROUP_ALB_DEFAULTS_ENABLED
+            - name: management.endpoint.health.show-details
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_SHOW-DETAILS
+            - name: spring.data.elasticsearch.client.reactive.endpoints
+              value: 'https://opensearchmain.masterdataonline.com:9200'
+            - name: spring.elasticsearch.rest.uris
+              value: 'https://opensearchmain.masterdataonline.com:9200'
+            - name: elastic.username
+              value: admin
+            - name: elastic.password
+              value: admin
+            - name: elastic.link
+              value: opensearchdiw.masterdataonline.com
+            - name: source.elastic.userName
+              value: admin
+            - name: source.elastic.password
+              value: admin
+            - name: source.elastic.port
+              value: '9200'
+            - name: source.elastic
+              value: opensearchmain.masterdataonline.com
+            - name: grpc.core.ui.server.url
+              value: "null"
+            - name: grpc.core.crud.server.url
+              value: "null"
+            - name: spark.endpoint
+              value: 'http://25.35.18.23:8998/batches'
+            - name: spark.lookup.version
+              value: 0.0.1-SNAPSHOT
+            - name: spark.homepath
+              value: user/hadoop/dev/rule
+            - name: spark.reader.version
+              value: 2022.02.01-20220407.073033-1
+            - name: spark.collector.version
+              value: 2022.02.01-20220408.100452-1
+            - name: spark.missingrule.version
+              value: 2022.02.01-SNAPSHOT
+            - name: spark.metadatarule.version
+              value: 2022.02.05-SNAPSHOT
+            - name: sparkudrrule.version
+              value: 2022.02.01-SNAPSHOT
+            - name: spark.lookuprule.version
+              value: 2022.02.05-SNAPSHOT
+            - name: spark.regexrule.version
+              value: '2021.04-SNAPSHOT '
+            - name: spark.regexrule.version
+              value: '2021.04-SNAPSHOT '
+            - name: spark.bucketName
+              value: 's3://dms-refresh-ap-southeast-1-717258037284'
+            - name: spark.properties.path
+              value: >-
+                hdfs://25.35.18.23:8020/user/hadoop/dev/rule/spark_main_rule_fuse.properties
+            - name: NEW_RELIC_APP_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SERVER_CANONICAL_URL_IN_RULE
+            - name: NEW_RELIC_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: NEWRELIC_LICENSE_KEY
+            - name: spring.datasource.driverClassName
+              value: org.postgresql.Driver
+            - name: google.apikey
+              value: AIzaSyB3FBFy5kPPrkiWPcOaoVZOBe5U7eo8ZvQ
+            - name: spring.servlet.multipart.max-file-size
+              value: 100MB
+            - name: spring.servlet.multipart.max-request-size
+              value: 100MB
+            - name: server.sparkEndpoint
+              value: 'http://25.35.18.23:8998/batches'
+            - name: server.sparkHdfsPath
+              value: >-
+                hdfs://ip-25-35-18-23.ap-southeast-1.compute.internal:8020/user/hadoop/test/spark_main_fuse.properties
+            - name: server.sparkHome
+              value: /user/hadoop/test
+            - name: server.sparkPostgresVersion
+              value: postgresql-42.1.1.jar
+            - name: server.sparkJooqVersion
+              value: jooq-3.14.11.jar
+            - name: sparkJooqVersion
+              value: jooq-3.14.11.jar
+            - name: server.sparkReactiveVersion
+              value: reactive-streams-1.0.2.jar
+            - name: server.sparkVersion
+              value: mdo-spark-2022.03.03.1.ST-SNAPSHOT.jar
+            - name: sparkDms.bucketName
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MDO_CONFIG_DMS_STORE_AWS_BUCKETNAME
+            - name: spring.jpa.show-sql
+              value: 'true'
+            - name: server.max-http-header-size
+              value: 512KB
+            - name: spring.datasource.hikari.connection-timeout
+              value: '20000'
+            - name: spring.datasource.hikari.minimum-idle
+              value: '1'
+            - name: spring.datasource.hikari.maximum-pool-size
+              value: '10'
+            - name: spring.datasource.hikari.idleTimeout
+              value: '30000'
+            - name: elastic.protocol
+              value: https
+            - name: elastic.port
+              value: '9200'
+            - name: dms.endpoint
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SERVER_CANONICAL_URL_IN_DMS
+          securityContext:
+            privileged: false
+          imagePullPolicy: IfNotPresent
+          terminationMessagePolicy: File
+          image: "docker.prospecta.com/prospecta/mdo-rule:development"
+          name: rule
+          ports:
+            - name: spring-port
+              containerPort: 8080
+              protocol: TCP
+            - name: grpc-port
+              containerPort: 10000
+              protocol: TCP
+          resources: {}
+      securityContext: {}
+      imagePullSecrets:
+        - name: nexus-image-pull
+---

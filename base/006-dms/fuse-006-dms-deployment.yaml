@@ -1,0 +1,161 @@
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  creationTimestamp: ~
+  labels: 
+    app: dms
+  name: dms
+spec: 
+  replicas: 3
+  selector: 
+    matchLabels: 
+      app: dms
+  strategy: {}
+  template: 
+    metadata: 
+      creationTimestamp: ~
+      labels: 
+        app: dms
+    spec: 
+      containers: 
+        - 
+          env:
+            - name: spring.datasource.url
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_DATASOURCE_URL_DEV_DMS
+            - name: spring.datasource.username
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_DATASOURCE_USER
+            - name: spring.datasource.password
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_DATASOURCE_PASSWD
+            - name: spring.data.elasticsearch.client.reactive.endpoints
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_DATA_ELASTICSEARCH_CLIENT_REACTIVE_ENDPOINTS
+            - name: spring.rabbitmq.addresses
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_RABBITMQ_ADDRESS
+            - name: spring.rabbitmq.password
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_RABBITMQ_PASSWD
+            - name: spring.rabbitmq.user
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_RABBITMQ_USER
+            - name: spring.elasticsearch.rest.uris
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_ELASTICSEARCH_REST_URIS
+            - name: mdo.config.jwt_rsk
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MDO_CONFIG_JWT_RSK
+            - name: management.endpoint.health.show-details
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_SHOW-DETAILS
+            - name: server.canonical.url
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SERVER_CANONICAL_URL_IN_DMS
+            - name: mdo.config.dms.store
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MDO_CONFIG_DMS_STORE
+            - name: mdo.config.dms.store.aws.region
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MDO_CONFIG_DMS_STORE_AWS_REGION
+            - name: mdo.config.dms.store.aws.bucketName
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MDO_CONFIG_DMS_STORE_AWS_BUCKETNAME
+            - name: mdo.config.dms.store.file.location
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MDO_CONFIG_DMS_STORE_FILE_LOCATION
+            - name: server.name
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SERVER_NAME
+            - name: mdo.config.dms.store.aws.access.key
+              value: 
+            - name: mdo.config.dms.store.aws.secret.access.key
+              value: 
+            - name: elastic.link
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: ELASTIC_LINK
+            - name: elastic.username
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: ELASTIC_USERNAME
+            - name: elastic.password
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: ELASTIC_PASSWORD
+            - name: NEW_RELIC_APP_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SERVER_CANONICAL_URL_IN_DMS
+            - name: NEW_RELIC_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: NEWRELIC_LICENSE_KEY
+            - name: spring.datasource.driverClassName
+              value: org.postgresql.Driver
+            - name: spring.datasource.hikari.connection-timeout
+              value: '20000'
+            - name: spring.datasource.hikari.minimum-idle
+              value: '1'
+            - name: spring.datasource.hikari.maximum-pool-size
+              value: '10'
+            - name: spring.datasource.hikari.idleTimeout
+              value: '30000'
+            - name: elastic.protocol
+              value: https
+            - name: elastic.port
+              value: '9200'
+          securityContext:
+            privileged: false
+          imagePullPolicy: IfNotPresent
+          terminationMessagePolicy: File
+          image: "docker.prospecta.com/prospecta/mdo-dms:development"
+          name: dms
+          ports:
+            - name: spring-port
+              containerPort: 8080
+              protocol: TCP
+          resources: {}
+      securityContext: {}
+      imagePullSecrets:
+        - name: nexus-image-pull
+---

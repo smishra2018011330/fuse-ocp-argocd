@@ -1,0 +1,221 @@
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  creationTimestamp: ~
+  labels: 
+    app: core-crud
+  name: core-crud
+spec: 
+  replicas: 3
+  selector: 
+    matchLabels: 
+      app: core-crud
+  strategy: {}
+  template: 
+    metadata: 
+      creationTimestamp: ~
+      labels: 
+        app: core-crud
+    spec: 
+      containers: 
+        - 
+          env:
+            - name: spring.datasource.url
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_DATASOURCE_URL_DEV_CRUD
+            - name: spring.datasource.username
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_DATASOURCE_USER
+            - name: spring.datasource.password
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_DATASOURCE_PASSWD
+            - name: spring.data.elasticsearch.client.reactive.endpoints
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_DATA_ELASTICSEARCH_CLIENT_REACTIVE_ENDPOINTS
+            - name: spring.elasticsearch.rest.uris
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_ELASTICSEARCH_REST_URIS
+            - name: mdo.config.jwt_rsk
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MDO_CONFIG_JWT_RSK
+            - name: spring.rabbitmq.username
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_RABBITMQ_USER
+            - name: spring.rabbitmq.password
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_RABBITMQ_PASSWD
+            - name: spring.rabbitmq.addresses
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_RABBITMQ_ADDRESS
+            - name: mdospark.path
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MDOSPARK_PATH
+            - name: mdospark.homepath
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MDOSPARK_HOMEPATH
+            - name: mdospark.version
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MDOSPARK_VERSION
+            - name: mdospark.endpoint
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MDOSPARK_ENDPOINT
+            - name: spring.rabbitmq.host
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_RABBITMQ_HOST
+            - name: spring.rabbitmq.port
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_RABBITMQ_PORT
+            - name: server.canonical.url
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SERVER_CANONICAL_URL_IN_CRUD
+            - name: server.name
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SERVER_NAME
+            - name: grpc.core.address.port
+              value:'10000'
+            - name: management.endpoint.health.show-details
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_SHOW-DETAILS
+            - name: management.health.defaults.enabled
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MANAGEMENT_HEALTH_DEFAULTS_ENABLED
+            - name: grpc.server.port
+              value: '10000'
+            - name: management.endpoint.health.group.alb.include
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_GROUP_ALB_INCLUDE
+            - name: management.endpoint.health.group.alb.show-components
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_GROUP_ALB_SHOW-COMPONENTS
+            - name: management.endpoint.health.group.alb.show-details
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_GROUP_ALB_SHOW-DETAILS
+            - name: management.health.group.alb.defaults.enabled
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MANAGEMENT_HEALTH_GROUP_ALB_DEFAULTS_ENABLED
+            - name: grpc.core.address.url
+              value: "null"
+            - name: grpc.rule.address.url
+              value: "null"
+            - name: grpc.rule.address.port
+              value: '10000'
+            - name: grpc.process.address.url
+              value: "null"
+            - name: grpc.process.address.port
+              value: '10000'
+            - name: elastic.link
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: ELASTIC_LINK
+            - name: elastic.username
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: ELASTIC_USERNAME
+            - name: elastic.password
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: ELASTIC_PASSWORD
+            - name: server.sparkEndpoint
+              value: 'http://192.168.10.106:8998/batches'
+            - name: server.sparkHdfsPath
+              value: '192.168.10.106:8080/opt/share/spark_main_fuse.properties'
+            - name: NEW_RELIC_APP_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SERVER_CANONICAL_URL_IN_CRUD
+            - name: NEW_RELIC_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: NEWRELIC_LICENSE_KEY
+            - name: spring.datasource.driverClassName
+              value: org.postgresql.Driver
+            - name: spring.jpa.properties.hibernate.multiTenancy
+              value: SCHEMA
+            - name: spring.jpa.properties.hibernate.tenant_identifier_resolver
+              value: CurrentTenantIdentifierResolver
+            - name: spring.jpa.properties.hibernate.multi_tenant_connection_provider
+              value: AbstractMultiTenantConnectionProvider
+            - name: server.max-http-header-size
+              value: 512KB
+            - name: spring.datasource.hikari.connection-timeout
+              value: '20000'
+            - name: spring.datasource.hikari.minimum-idle
+              value: '1'
+            - name: spring.datasource.hikari.maximum-pool-size
+              value: '10'
+            - name: spring.datasource.hikari.idleTimeout
+              value: '30000'
+            - name: elastic.protocol
+              value: https
+            - name: elastic.port
+              value: '9200'
+          securityContext:
+            privileged: false
+          imagePullPolicy: IfNotPresent
+          terminationMessagePolicy: File
+          image: "docker.prospecta.com/prospecta/mdo-core-crud:development"
+          name: core-crud
+          ports:
+            - name: spring-port
+              containerPort: 8080
+              protocol: TCP
+            - name: grpc-port
+              containerPort: 10000
+              protocol: TCP
+          resources: {}
+      securityContext: {}
+      imagePullSecrets:
+        - name: nexus-image-pull
+---

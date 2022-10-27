@@ -1,0 +1,20 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  creationTimestamp: null
+  labels:
+    app: core-crud
+  name: core-crud
+spec:
+  host: "core-crud-development.apps.ocp.virt.prospecta.com.au"
+  port:
+    targetPort: 8080
+  to:
+    kind: Service
+    name: core-crud
+    weight: 100
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
+status: {}

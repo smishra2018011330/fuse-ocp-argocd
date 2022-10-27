@@ -1,0 +1,173 @@
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  creationTimestamp: ~
+  labels: 
+    app: daxe
+  name: daxe
+spec: 
+  replicas: 3
+  selector: 
+    matchLabels: 
+      app: daxe
+  strategy: {}
+  template: 
+    metadata: 
+      creationTimestamp: ~
+      labels: 
+        app: daxe
+    spec: 
+      containers: 
+        - 
+          env:
+           - name: spring.datasource.url
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_DATASOURCE_URL_DEV_DAXE
+            - name: spring.datasource.username
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_DATASOURCE_USER
+            - name: spring.datasource.password
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_DATASOURCE_PASSWD
+            - name: spring.data.elasticsearch.client.reactive.endpoints
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_DATA_ELASTICSEARCH_CLIENT_REACTIVE_ENDPOINTS
+            - name: spring.elasticsearch.rest.uris
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_ELASTICSEARCH_REST_URIS
+            - name: mdo.config.jwt_rsk
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MDO_CONFIG_JWT_RSK
+            - name: spring.rabbitmq.username
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_RABBITMQ_USER
+            - name: spring.rabbitmq.password
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_RABBITMQ_PASSWD
+            - name: spring.rabbitmq.addresses
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_RABBITMQ_ADDRESS
+            - name: spring.rabbitmq.host
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_RABBITMQ_HOST
+            - name: spring.rabbitmq.port
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_RABBITMQ_PORT
+            - name: spring.rabbitmq.ssl.enabled
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_RABBITMQ_SSL_ENABLED
+            - name: server.canonical.url
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SERVER_CANONICAL_URL_IN_DAXE
+            - name: server.name
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SERVER_NAME
+            - name: grpc.server.port
+              value: '10000'
+            - name: grpc.server.enable-keep-alive
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: GRPC_SERVER_ENABLE-KEEP-ALIVE
+            - name: management.endpoint.health.group.alb.show-details
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_GROUP_ALB_SHOW-DETAILS
+            - name: management.endpoint.health.group.alb.include
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_GROUP_ALB_INCLUDE
+            - name: management.endpoint.health.group.alb.show-components
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_GROUP_ALB_SHOW-COMPONENTS
+            - name: management.health.group.alb.defaults.enabled
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MANAGEMENT_HEALTH_GROUP_ALB_DEFAULTS_ENABLED
+            - name: management.endpoint.health.show-details
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: MANAGEMENT_ENDPOINT_HEALTH_SHOW-DETAILS
+            - name: elastic.link
+              value: >-
+                vpc-opensearch-11-2sa4tlw6bbt3b6lfbf3zz5vkny.ap-southeast-1.es.amazonaws.com
+            - name: elastic.username
+              value: opensearch_master
+            - name: elastic.password
+              value: Pros@9753
+            - name: meta.grpc.host
+              value: "null"
+            - name: meta.grpc.port
+              value: '10000'
+            - name: meta.grpc.nonsecure
+              value: 'true'
+            - name: data.grpc.host
+              value: "null"
+            - name: data.grpc.port
+              value: '10000'
+            - name: data.grpc.nonsecure
+              value: 'true'
+            - name: spring.datasource.driverClassName
+              value: org.postgresql.Driver
+            - name: spring.datasource.hikari.connection-timeout
+              value: '20000'
+            - name: spring.datasource.hikari.minimum-idle
+              value: '1'
+            - name: spring.datasource.hikari.maximum-pool-size
+              value: '10'
+            - name: spring.datasource.hikari.idleTimeout
+              value: '30000'
+          securityContext:
+            privileged: false
+          imagePullPolicy: IfNotPresent
+          terminationMessagePolicy: File
+          image: "docker.prospecta.com/prospecta/mdo-daxe:development"
+          name: daxe
+          ports:
+          ports:
+            - name: spring-port
+              containerPort: 8080
+              protocol: TCP
+            - name: grpc-port
+              containerPort: 10000
+              protocol: TCP
+          resources: {}
+      securityContext: {}
+      imagePullSecrets:
+        - name: nexus-image-pull
+---

@@ -1,0 +1,20 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  creationTimestamp: null
+  labels:
+    app: rule-metadata
+  name: rule-metadata
+spec:
+  host: "rule-metadata-development.apps.ocp.virt.prospecta.com.au"
+  port:
+    targetPort: 8080
+  to:
+    kind: Service
+    name: rule-metadata
+    weight: 100
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
+status: {}

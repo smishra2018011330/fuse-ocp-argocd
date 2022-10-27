@@ -1,0 +1,112 @@
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  creationTimestamp: ~
+  labels: 
+    app: vd-execution
+  name: vd-execution
+spec: 
+  replicas: 3
+  selector: 
+    matchLabels: 
+      app: vd-execution
+  strategy: {}
+  template: 
+    metadata: 
+      creationTimestamp: ~
+      labels: 
+        app: vd-execution
+    spec: 
+      containers: 
+        - 
+          env:
+            - name: spring.datasource.url
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_DATASOURCE_URL_DEV_CRUD
+            - name: spring.datasource.username
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_DATASOURCE_USER
+            - name: spring.datasource.password
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SPRING_DATASOURCE_PASSWD
+            - name: server.canonical.url
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SERVER_CANONICAL_URL_IN_VD
+            - name: server.name
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SERVER_NAME
+            - name: elastic.link
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: ELASTIC_LINK
+            - name: elastic.username
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: ELASTIC_USERNAME
+            - name: elastic.password
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: ELASTIC_PASSWORD
+            - name: NEW_RELIC_APP_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: SERVER_CANONICAL_URL_IN_VD
+            - name: NEW_RELIC_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: NEWRELIC_LICENSE_KEY
+            - name: app.encryption.secret-key
+              valueFrom:
+                secretKeyRef:
+                  name: ocp-dev-secrets
+                  key: APP_ENCRYPTION_SECRET_KEY
+            - name: spring.datasource.driverClassName
+              value: org.postgresql.Driver
+            - name: spring.datasource.hikari.connection-timeout
+              value: '20000'
+            - name: spring.datasource.hikari.minimum-idle
+              value: '1'
+            - name: spring.datasource.hikari.maximum-pool-size
+              value: '2'
+            - name: spring.datasource.hikari.idleTimeout
+              value: '30000'
+            - name: elastic.protocol
+              value: https
+            - name: elastic.port
+              value: '9200'
+            - name: server.sparkjobfile
+              value: >-
+                /user/hadoop/sync/vd/snapshot/mdo-spark-c.2022.03.01-SNAPSHOT.jar
+            - name: server.sparkEndpoint
+              value: 'http://25.35.18.23:8998/batches'
+          securityContext:
+            privileged: false
+          imagePullPolicy: IfNotPresent
+          terminationMessagePolicy: File
+          image: "docker.prospecta.com/prospecta/mdo-vd-execution:development"
+          name: vd-execution
+          ports:
+            - name: spring-port
+              containerPort: 8080
+              protocol: TCP
+          resources: {}
+      securityContext: {}
+      imagePullSecrets:
+        - name: nexus-image-pull
+---
